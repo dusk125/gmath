@@ -1,3 +1,4 @@
+// GENERATED! DO NOT EDIT
 package gmath
 
 import (
@@ -6,250 +7,691 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-type Number interface {
-	constraints.Float | constraints.Integer
+// Abs returns the absolute value of x.
+//
+// Special cases are:
+//
+// Abs(±Inf) = +Inf
+// Abs(NaN) = NaN
+func Abs[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Abs(float64(x)))
 }
 
-func Abs[T Number](x T) T {
-	return T(math.Abs(float64(x)))
+// Acos returns the arccosine, in radians, of x.
+//
+// Special case is:
+//
+// Acos(x) = NaN if x < -1 or x > 1
+func Acos[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Acos(float64(x)))
 }
 
-func Acos[T Number](x T) T {
-	return T(math.Acos(float64(x)))
+// Acosh returns the inverse hyperbolic cosine of x.
+//
+// Special cases are:
+//
+// Acosh(+Inf) = +Inf
+// Acosh(x) = NaN if x < 1
+// Acosh(NaN) = NaN
+func Acosh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Acosh(float64(x)))
 }
 
-func Acosh[T Number](x T) T {
-	return T(math.Acosh(float64(x)))
+// Asin returns the arcsine, in radians, of x.
+//
+// Special cases are:
+//
+// Asin(±0) = ±0
+// Asin(x) = NaN if x < -1 or x > 1
+func Asin[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Asin(float64(x)))
 }
 
-func Asin[T Number](x T) T {
-	return T(math.Asin(float64(x)))
+// Asinh returns the inverse hyperbolic sine of x.
+//
+// Special cases are:
+//
+// Asinh(±0) = ±0
+// Asinh(±Inf) = ±Inf
+// Asinh(NaN) = NaN
+func Asinh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Asinh(float64(x)))
 }
 
-func Asinh[T Number](x T) T {
-	return T(math.Asinh(float64(x)))
+// Atan returns the arctangent, in radians, of x.
+//
+// Special cases are:
+//
+// Atan(±0) = ±0
+// Atan(±Inf) = ±Pi/2
+func Atan[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Atan(float64(x)))
 }
 
-func Atan[T Number](x T) T {
-	return T(math.Atan(float64(x)))
+// Atan2 returns the arc tangent of y/x, using the signs of the two to
+// determine the quadrant of the return value.
+//
+// Special cases are (in order):
+//
+// Atan2(y, NaN) = NaN
+// Atan2(NaN, x) = NaN
+// Atan2(+0, x>=0) = +0
+// Atan2(-0, x>=0) = -0
+// Atan2(+0, x<=-0) = +Pi
+// Atan2(-0, x<=-0) = -Pi
+// Atan2(y>0, 0) = +Pi/2
+// Atan2(y<0, 0) = -Pi/2
+// Atan2(+Inf, +Inf) = +Pi/4
+// Atan2(-Inf, +Inf) = -Pi/4
+// Atan2(+Inf, -Inf) = 3Pi/4
+// Atan2(-Inf, -Inf) = -3Pi/4
+// Atan2(y, +Inf) = 0
+// Atan2(y>0, -Inf) = +Pi
+// Atan2(y<0, -Inf) = -Pi
+// Atan2(+Inf, x) = +Pi/2
+// Atan2(-Inf, x) = -Pi/2
+func Atan2[N constraints.Float | constraints.Integer](y N, x N) N {
+	return N(math.Atan2(float64(y), float64(x)))
 }
 
-func Atan2[T Number](y, x T) T {
-	return T(math.Atan2(float64(y), float64(x)))
+// Atanh returns the inverse hyperbolic tangent of x.
+//
+// Special cases are:
+//
+// Atanh(1) = +Inf
+// Atanh(±0) = ±0
+// Atanh(-1) = -Inf
+// Atanh(x) = NaN if x < -1 or x > 1
+// Atanh(NaN) = NaN
+func Atanh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Atanh(float64(x)))
 }
 
-func Atanh[T Number](x T) T {
-	return T(math.Atanh(float64(x)))
+// Cbrt returns the cube root of x.
+//
+// Special cases are:
+//
+// Cbrt(±0) = ±0
+// Cbrt(±Inf) = ±Inf
+// Cbrt(NaN) = NaN
+func Cbrt[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Cbrt(float64(x)))
 }
 
-func Cbrt[T Number](x T) T {
-	return T(math.Cbrt(float64(x)))
+// Ceil returns the least integer value greater than or equal to x.
+//
+// Special cases are:
+//
+// Ceil(±0) = ±0
+// Ceil(±Inf) = ±Inf
+// Ceil(NaN) = NaN
+func Ceil[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Ceil(float64(x)))
 }
 
-func Ceil[T Number](x T) T {
-	return T(math.Ceil(float64(x)))
+// Copysign returns a value with the magnitude of f and the sign of sign.
+func Copysign[N constraints.Float | constraints.Integer](f N, sign N) N {
+	return N(math.Copysign(float64(f), float64(sign)))
 }
 
-func Copysign[T Number](x, y T) T {
-	return T(math.Copysign(float64(x), float64(y)))
+// Cos returns the cosine of the radian argument x.
+//
+// Special cases are:
+//
+// Cos(±Inf) = NaN
+// Cos(NaN) = NaN
+func Cos[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Cos(float64(x)))
 }
 
-func Cos[T Number](x T) T {
-	return T(math.Cos(float64(x)))
+// Cosh returns the hyperbolic cosine of x.
+//
+// Special cases are:
+//
+// Cosh(±0) = 1
+// Cosh(±Inf) = +Inf
+// Cosh(NaN) = NaN
+func Cosh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Cosh(float64(x)))
 }
 
-func Cosh[T Number](x T) T {
-	return T(math.Cosh(float64(x)))
+// Dim returns the maximum of x-y or 0.
+//
+// Special cases are:
+//
+// Dim(+Inf, +Inf) = NaN
+// Dim(-Inf, -Inf) = NaN
+// Dim(x, NaN) = Dim(NaN, x) = NaN
+func Dim[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Dim(float64(x), float64(y)))
 }
 
-func Dim[T Number](x, y T) T {
-	return T(math.Dim(float64(x), float64(y)))
+// Erf returns the error function of x.
+//
+// Special cases are:
+//
+// Erf(+Inf) = 1
+// Erf(-Inf) = -1
+// Erf(NaN) = NaN
+func Erf[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Erf(float64(x)))
 }
 
-func Erf[T Number](x T) T {
-	return T(math.Erf(float64(x)))
+// Erfc returns the complementary error function of x.
+//
+// Special cases are:
+//
+// Erfc(+Inf) = 0
+// Erfc(-Inf) = 2
+// Erfc(NaN) = NaN
+func Erfc[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Erfc(float64(x)))
 }
 
-func Erfc[T Number](x T) T {
-	return T(math.Erfc(float64(x)))
+// Erfcinv returns the inverse of Erfc(x).
+//
+// Special cases are:
+//
+// Erfcinv(0) = +Inf
+// Erfcinv(2) = -Inf
+// Erfcinv(x) = NaN if x < 0 or x > 2
+// Erfcinv(NaN) = NaN
+func Erfcinv[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Erfcinv(float64(x)))
 }
 
-func Erfcinv[T Number](x T) T {
-	return T(math.Erfcinv(float64(x)))
+// Erfinv returns the inverse error function of x.
+//
+// Special cases are:
+//
+// Erfinv(1) = +Inf
+// Erfinv(-1) = -Inf
+// Erfinv(x) = NaN if x < -1 or x > 1
+// Erfinv(NaN) = NaN
+func Erfinv[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Erfinv(float64(x)))
 }
 
-func Erfinv[T Number](x T) T {
-	return T(math.Erfinv(float64(x)))
+// Exp returns e**x, the base-e exponential of x.
+//
+// Special cases are:
+//
+// Exp(+Inf) = +Inf
+// Exp(NaN) = NaN
+//
+// Very large values overflow to 0 or +Inf. Very small values underflow to 1.
+func Exp[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Exp(float64(x)))
 }
 
-func Exp[T Number](x T) T {
-	return T(math.Exp(float64(x)))
+// Exp2 returns 2**x, the base-2 exponential of x.
+//
+// Special cases are the same as Exp.
+func Exp2[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Exp2(float64(x)))
 }
 
-func Exp2[T Number](x T) T {
-	return T(math.Exp2(float64(x)))
+// Expm1 returns e**x - 1, the base-e exponential of x minus 1. It is more
+// accurate than Exp(x) - 1 when x is near zero.
+//
+// Special cases are:
+//
+// Expm1(+Inf) = +Inf
+// Expm1(-Inf) = -1
+// Expm1(NaN) = NaN
+//
+// Very large values overflow to -1 or +Inf.
+func Expm1[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Expm1(float64(x)))
 }
 
-func Expm1[T Number](x T) T {
-	return T(math.Expm1(float64(x)))
+// FMA returns x * y + z, computed with only one rounding. (That is, FMA
+// returns the fused multiply-add of x, y, and z.)
+func FMA[N constraints.Float | constraints.Integer](x N, y N, z N) N {
+	return N(math.FMA(float64(x), float64(y), float64(z)))
 }
 
-func FMA[T Number](x, y, z T) T {
-	return T(math.FMA(float64(x), float64(y), float64(z)))
+// Floor returns the greatest integer value less than or equal to x.
+//
+// Special cases are:
+//
+// Floor(±0) = ±0
+// Floor(±Inf) = ±Inf
+// Floor(NaN) = NaN
+func Floor[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Floor(float64(x)))
 }
 
-func Floor[T Number](x T) T {
-	return T(math.Floor(float64(x)))
+// Frexp breaks f into a normalized fraction and an integral power of two.
+// It returns frac and exp satisfying f == frac × 2**exp, with the absolute
+// value of frac in the interval [½, 1).
+//
+// Special cases are:
+//
+// Frexp(±0) = ±0, 0
+// Frexp(±Inf) = ±Inf, 0
+// Frexp(NaN) = NaN, 0
+func Frexp[N constraints.Float | constraints.Integer, I constraints.Integer](f N) (frac N, exp I) {
+	fracR, expR := math.Frexp(float64(f))
+	return N(fracR), I(expR)
 }
 
-func Frexp[T constraints.Float](f T) (frac T, exp int) {
-	fra, exp := math.Frexp(float64(f))
-	return T(fra), exp
+// Gamma returns the Gamma function of x.
+//
+// Special cases are:
+//
+// Gamma(+Inf) = +Inf
+// Gamma(+0) = +Inf
+// Gamma(-0) = -Inf
+// Gamma(x) = NaN for integer x < 0
+// Gamma(-Inf) = NaN
+// Gamma(NaN) = NaN
+func Gamma[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Gamma(float64(x)))
 }
 
-func Gamma[T Number](x T) T {
-	return T(math.Gamma(float64(x)))
+// Hypot returns Sqrt(p*p + q*q), taking care to avoid unnecessary overflow and
+// underflow.
+//
+// Special cases are:
+//
+// Hypot(±Inf, q) = +Inf
+// Hypot(p, ±Inf) = +Inf
+// Hypot(NaN, q) = NaN
+// Hypot(p, NaN) = NaN
+func Hypot[N constraints.Float | constraints.Integer](p N, q N) N {
+	return N(math.Hypot(float64(p), float64(q)))
 }
 
-func Hypot[T Number](p, q T) T {
-	return T(math.Hypot(float64(p), float64(q)))
+// Ilogb returns the binary exponent of x as an integer.
+//
+// Special cases are:
+//
+// Ilogb(±Inf) = MaxInt32
+// Ilogb(0) = MinInt32
+// Ilogb(NaN) = MaxInt32
+func Ilogb[N constraints.Float | constraints.Integer, I constraints.Integer](x N) I {
+	return I(math.Ilogb(float64(x)))
 }
 
-func Ilogb[T constraints.Float](x T) int {
-	return math.Ilogb(float64(x))
+// Inf returns positive infinity if sign >= 0, negative infinity if sign < 0.
+func Inf[N constraints.Float | constraints.Integer, I constraints.Integer](sign I) N {
+	return N(math.Inf(int(sign)))
 }
 
-func Inf[T constraints.Float](sign int) T {
-	return T(math.Inf(sign))
+// IsInf reports whether f is an infinity, according to sign. If sign > 0,
+// IsInf reports whether f is positive infinity. If sign < 0, IsInf reports
+// whether f is negative infinity. If sign == 0, IsInf reports whether f is
+// either infinity.
+func IsInf[N constraints.Float | constraints.Integer, I constraints.Integer](f N, sign I) bool {
+	return math.IsInf(float64(f), int(sign))
 }
 
-func IsInf[T constraints.Float](f T, sign int) bool {
-	return math.IsInf(float64(f), sign)
-}
-
-func IsNaN[T constraints.Float](f T) (is bool) {
+// IsNaN reports whether f is an IEEE 754 “not-a-number” value.
+func IsNaN[N constraints.Float | constraints.Integer](f N) (is bool) {
 	return math.IsNaN(float64(f))
 }
 
-func J0[T Number](x T) T {
-	return T(math.J0(float64(x)))
+// J0 returns the order-zero Bessel function of the first kind.
+//
+// Special cases are:
+//
+// J0(±Inf) = 0
+// J0(0) = 1
+// J0(NaN) = NaN
+func J0[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.J0(float64(x)))
 }
 
-func J1[T Number](x T) T {
-	return T(math.J1(float64(x)))
+// J1 returns the order-one Bessel function of the first kind.
+//
+// Special cases are:
+//
+// J1(±Inf) = 0
+// J1(NaN) = NaN
+func J1[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.J1(float64(x)))
 }
 
-func Jn[T Number](n int, x T) T {
-	return T(math.Jn(n, float64(x)))
+// Jn returns the order-n Bessel function of the first kind.
+//
+// Special cases are:
+//
+// Jn(n, ±Inf) = 0
+// Jn(n, NaN) = NaN
+func Jn[N constraints.Float | constraints.Integer, I constraints.Integer](n I, x N) N {
+	return N(math.Jn(int(n), float64(x)))
 }
 
-func Ldexp[T Number](frac T, exp int) T {
-	return T(math.Ldexp(float64(frac), exp))
+// Ldexp is the inverse of Frexp. It returns frac × 2**exp.
+//
+// Special cases are:
+//
+// Ldexp(±0, exp) = ±0
+// Ldexp(±Inf, exp) = ±Inf
+// Ldexp(NaN, exp) = NaN
+func Ldexp[N constraints.Float | constraints.Integer, I constraints.Integer](frac N, exp I) N {
+	return N(math.Ldexp(float64(frac), int(exp)))
 }
 
-func Lgamma[T Number](x T) (lgamma T, sign int) {
-	g, sign := math.Lgamma(float64(x))
-	return T(g), sign
+// Lgamma returns the natural logarithm and sign (-1 or +1) of Gamma(x).
+//
+// Special cases are:
+//
+// Lgamma(+Inf) = +Inf
+// Lgamma(0) = +Inf
+// Lgamma(-integer) = +Inf
+// Lgamma(-Inf) = -Inf
+// Lgamma(NaN) = NaN
+func Lgamma[N constraints.Float | constraints.Integer, I constraints.Integer](x N) (lgamma N, sign I) {
+	lgammaR, signR := math.Lgamma(float64(x))
+	return N(lgammaR), I(signR)
 }
 
-func Log[T Number](x T) T {
-	return T(math.Log(float64(x)))
+// Log returns the natural logarithm of x.
+//
+// Special cases are:
+//
+// Log(+Inf) = +Inf
+// Log(0) = -Inf
+// Log(x < 0) = NaN
+// Log(NaN) = NaN
+func Log[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Log(float64(x)))
 }
 
-func Log10[T Number](x T) T {
-	return T(math.Log10(float64(x)))
+// Log10 returns the decimal logarithm of x. The special cases are the same as
+// for Log.
+func Log10[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Log10(float64(x)))
 }
 
-func Log1p[T Number](x T) T {
-	return T(math.Log1p(float64(x)))
+// Log1p returns the natural logarithm of 1 plus its argument x. It is more
+// accurate than Log(1 + x) when x is near zero.
+//
+// Special cases are:
+//
+// Log1p(+Inf) = +Inf
+// Log1p(±0) = ±0
+// Log1p(-1) = -Inf
+// Log1p(x < -1) = NaN
+// Log1p(NaN) = NaN
+func Log1p[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Log1p(float64(x)))
 }
 
-func Log2[T Number](x T) T {
-	return T(math.Log2(float64(x)))
+// Log2 returns the binary logarithm of x. The special cases are the same as
+// for Log.
+func Log2[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Log2(float64(x)))
 }
 
-func Logb[T Number](x T) T {
-	return T(math.Logb(float64(x)))
+// Logb returns the binary exponent of x.
+//
+// Special cases are:
+//
+// Logb(±Inf) = +Inf
+// Logb(0) = -Inf
+// Logb(NaN) = NaN
+func Logb[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Logb(float64(x)))
 }
 
-func Max[T Number](x, y T) T {
-	return T(math.Max(float64(x), float64(y)))
+// Max returns the larger of x or y.
+//
+// Special cases are:
+//
+// Max(x, +Inf) = Max(+Inf, x) = +Inf
+// Max(x, NaN) = Max(NaN, x) = NaN
+// Max(+0, ±0) = Max(±0, +0) = +0
+// Max(-0, -0) = -0
+func Max[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Max(float64(x), float64(y)))
 }
 
-func Min[T Number](x, y T) T {
-	return T(math.Min(float64(x), float64(y)))
+// Min returns the smaller of x or y.
+//
+// Special cases are:
+//
+// Min(x, -Inf) = Min(-Inf, x) = -Inf
+// Min(x, NaN) = Min(NaN, x) = NaN
+// Min(-0, ±0) = Min(±0, -0) = -0
+func Min[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Min(float64(x), float64(y)))
 }
 
-func Mod[T Number](x, y T) T {
-	return T(math.Mod(float64(x), float64(y)))
+// Mod returns the floating-point remainder of x/y. The magnitude of the result
+// is less than y and its sign agrees with that of x.
+//
+// Special cases are:
+//
+// Mod(±Inf, y) = NaN
+// Mod(NaN, y) = NaN
+// Mod(x, 0) = NaN
+// Mod(x, ±Inf) = x
+// Mod(x, NaN) = NaN
+func Mod[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Mod(float64(x), float64(y)))
 }
 
-func Modf[I constraints.Integer, T constraints.Float](f T) (int I, frac T) {
-	i, fr := math.Modf(float64(f))
-	return I(i), T(fr)
+// Modf returns integer and fractional floating-point numbers that sum to f.
+// Both values have the same sign as f.
+//
+// Special cases are:
+//
+// Modf(±Inf) = ±Inf, NaN
+// Modf(NaN) = NaN, NaN
+func Modf[N constraints.Float | constraints.Integer](f N) (int N, frac N) {
+	intR, fracR := math.Modf(float64(f))
+	return N(intR), N(fracR)
 }
 
-func Pow[T Number](x, y T) T {
-	return T(math.Pow(float64(x), float64(y)))
+// NaN returns an IEEE 754 “not-a-number” value.
+func NaN[N constraints.Float | constraints.Integer]() N {
+	return N(math.NaN())
 }
 
-func Pow10[T Number](n int) T {
-	return T(math.Pow10(n))
+// Nextafter returns the next representable float64 value after x towards y.
+//
+// Special cases are:
+//
+// Nextafter(x, x)   = x
+// Nextafter(NaN, y) = NaN
+// Nextafter(x, NaN) = NaN
+func Nextafter[N constraints.Float | constraints.Integer](x N, y N) (r N) {
+	return N(math.Nextafter(float64(x), float64(y)))
 }
 
-func Remainder[T Number](x, y T) T {
-	return T(math.Remainder(float64(x), float64(y)))
+// Pow returns x**y, the base-x exponential of y.
+//
+// Special cases are (in order):
+//
+// Pow(x, ±0) = 1 for any x
+// Pow(1, y) = 1 for any y
+// Pow(x, 1) = x for any x
+// Pow(NaN, y) = NaN
+// Pow(x, NaN) = NaN
+// Pow(±0, y) = ±Inf for y an odd integer < 0
+// Pow(±0, -Inf) = +Inf
+// Pow(±0, +Inf) = +0
+// Pow(±0, y) = +Inf for finite y < 0 and not an odd integer
+// Pow(±0, y) = ±0 for y an odd integer > 0
+// Pow(±0, y) = +0 for finite y > 0 and not an odd integer
+// Pow(-1, ±Inf) = 1
+// Pow(x, +Inf) = +Inf for |x| > 1
+// Pow(x, -Inf) = +0 for |x| > 1
+// Pow(x, +Inf) = +0 for |x| < 1
+// Pow(x, -Inf) = +Inf for |x| < 1
+// Pow(+Inf, y) = +Inf for y > 0
+// Pow(+Inf, y) = +0 for y < 0
+// Pow(-Inf, y) = Pow(-0, -y)
+// Pow(x, y) = NaN for finite x < 0 and finite non-integer y
+func Pow[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Pow(float64(x), float64(y)))
 }
 
-func Round[T constraints.Float, I constraints.Integer](x T) I {
-	return I(math.Round(float64(x)))
+// Pow10 returns 10**n, the base-10 exponential of n.
+//
+// Special cases are:
+//
+// Pow10(n) =    0 for n < -323
+// Pow10(n) = +Inf for n > 308
+func Pow10[N constraints.Float | constraints.Integer, I constraints.Integer](n I) N {
+	return N(math.Pow10(int(n)))
 }
 
-func RoundToEven[T constraints.Float, I constraints.Integer](x T) I {
-	return I(math.RoundToEven(float64(x)))
+// Remainder returns the IEEE 754 floating-point remainder of x/y.
+//
+// Special cases are:
+//
+// Remainder(±Inf, y) = NaN
+// Remainder(NaN, y) = NaN
+// Remainder(x, 0) = NaN
+// Remainder(x, ±Inf) = x
+// Remainder(x, NaN) = NaN
+func Remainder[N constraints.Float | constraints.Integer](x N, y N) N {
+	return N(math.Remainder(float64(x), float64(y)))
 }
 
-func Signbit[T Number](x T) bool {
+// Round returns the nearest integer, rounding half away from zero.
+//
+// Special cases are:
+//
+// Round(±0) = ±0
+// Round(±Inf) = ±Inf
+// Round(NaN) = NaN
+func Round[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Round(float64(x)))
+}
+
+// RoundToEven returns the nearest integer, rounding ties to even.
+//
+// Special cases are:
+//
+// RoundToEven(±0) = ±0
+// RoundToEven(±Inf) = ±Inf
+// RoundToEven(NaN) = NaN
+func RoundToEven[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.RoundToEven(float64(x)))
+}
+
+// Signbit reports whether x is negative or negative zero.
+func Signbit[N constraints.Float | constraints.Integer](x N) bool {
 	return math.Signbit(float64(x))
 }
 
-func Sin[T Number](x T) T {
-	return T(math.Sin(float64(x)))
+// Sin returns the sine of the radian argument x.
+//
+// Special cases are:
+//
+// Sin(±0) = ±0
+// Sin(±Inf) = NaN
+// Sin(NaN) = NaN
+func Sin[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Sin(float64(x)))
 }
 
-func Sincos[T Number](x T) (sin, cos T) {
-	s, c := math.Sincos(float64(x))
-	return T(s), T(c)
+// Sincos returns Sin(x), Cos(x).
+//
+// Special cases are:
+//
+// Sincos(±0) = ±0, 1
+// Sincos(±Inf) = NaN, NaN
+// Sincos(NaN) = NaN, NaN
+func Sincos[N constraints.Float | constraints.Integer](x N) (sin N, cos N) {
+	sinR, cosR := math.Sincos(float64(x))
+	return N(sinR), N(cosR)
 }
 
-func Sinh[T Number](x T) T {
-	return T(math.Sinh(float64(x)))
+// Sinh returns the hyperbolic sine of x.
+//
+// Special cases are:
+//
+// Sinh(±0) = ±0
+// Sinh(±Inf) = ±Inf
+// Sinh(NaN) = NaN
+func Sinh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Sinh(float64(x)))
 }
 
-func Sqrt[T Number](x T) T {
-	return T(math.Sqrt(float64(x)))
+// Sqrt returns the square root of x.
+//
+// Special cases are:
+//
+// Sqrt(+Inf) = +Inf
+// Sqrt(±0) = ±0
+// Sqrt(x < 0) = NaN
+// Sqrt(NaN) = NaN
+func Sqrt[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Sqrt(float64(x)))
 }
 
-func Tan[T Number](x T) T {
-	return T(math.Tan(float64(x)))
+// Tan returns the tangent of the radian argument x.
+//
+// Special cases are:
+//
+// Tan(±0) = ±0
+// Tan(±Inf) = NaN
+// Tan(NaN) = NaN
+func Tan[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Tan(float64(x)))
 }
 
-func Tanh[T Number](x T) T {
-	return T(math.Tanh(float64(x)))
+// Tanh returns the hyperbolic tangent of x.
+//
+// Special cases are:
+//
+// Tanh(±0) = ±0
+// Tanh(±Inf) = ±1
+// Tanh(NaN) = NaN
+func Tanh[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Tanh(float64(x)))
 }
 
-func Trunc[T constraints.Float, I constraints.Integer](x T) I {
-	return I(math.Trunc(float64(x)))
+// Trunc returns the integer value of x.
+//
+// Special cases are:
+//
+// Trunc(±0) = ±0
+// Trunc(±Inf) = ±Inf
+// Trunc(NaN) = NaN
+func Trunc[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Trunc(float64(x)))
 }
 
-func Y0[T Number](x T) T {
-	return T(math.Y0(float64(x)))
+// Y0 returns the order-zero Bessel function of the second kind.
+//
+// Special cases are:
+//
+// Y0(+Inf) = 0
+// Y0(0) = -Inf
+// Y0(x < 0) = NaN
+// Y0(NaN) = NaN
+func Y0[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Y0(float64(x)))
 }
 
-func Y1[T Number](x T) T {
-	return T(math.Y1(float64(x)))
+// Y1 returns the order-one Bessel function of the second kind.
+//
+// Special cases are:
+//
+// Y1(+Inf) = 0
+// Y1(0) = -Inf
+// Y1(x < 0) = NaN
+// Y1(NaN) = NaN
+func Y1[N constraints.Float | constraints.Integer](x N) N {
+	return N(math.Y1(float64(x)))
 }
 
-func Yn[T Number](n int, x T) T {
-	return T(math.Yn(n, float64(x)))
+// Yn returns the order-n Bessel function of the second kind.
+//
+// Special cases are:
+//
+// Yn(n, +Inf) = 0
+// Yn(n ≥ 0, 0) = -Inf
+// Yn(n < 0, 0) = +Inf if n is odd, -Inf if n is even
+// Yn(n, x < 0) = NaN
+// Yn(n, NaN) = NaN
+func Yn[N constraints.Float | constraints.Integer, I constraints.Integer](n I, x N) N {
+	return N(math.Yn(int(n), float64(x)))
 }
