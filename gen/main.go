@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -16,7 +17,12 @@ import (
 )
 
 var (
-	skip []string
+	outDir string
+	skip   = []string{
+		"Float32bits", "Float32frombits", "Float64bits", "Float64frombits",
+		"Nextafter", "Nextafter32",
+		"NaN",
+	}
 )
 
 func main() {
@@ -29,41 +35,35 @@ func main() {
 		},
 	}
 
-	root.Flags().StringSliceVar(&skip, "skip", []string{}, "functions to skip")
+	root.Flags().StringVar(&outDir, "dir", ".", "directory to output to")
+	root.Flags().StringSliceVar(&skip, "skip", skip, "functions to skip")
 
 	if err := root.Execute(); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func shouldSkip(name string) bool {
-	return slices.Index(skip, name) > -1
-}
-
 func generate(parent context.Context) {
-	b := strings.Builder{}
-
 	cmd := exec.CommandContext(parent, "go", "doc", "-short", "math")
-	cmd.Stdout = &b
 	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
+	b, err := cmd.Output()
+	if err != nil {
 		panic(err)
 	}
 
-	lines := strings.Split(b.String(), "\n")
-	b.Reset()
-	b.WriteString("package dummy\n")
+	dummyPkg := strings.Builder{}
 
-	for _, l := range lines {
+	fmt.Fprintln(&dummyPkg, "package dummy")
+
+	for l := range strings.SplitSeq(string(b), "\n") {
 		if !strings.HasPrefix(l, "func") {
 			continue
 		}
 
-		b.WriteString(l)
-		b.WriteByte('\n')
+		fmt.Fprintln(&dummyPkg, l)
 	}
 
-	f, err := os.Create("math.go")
+	f, err := os.Create(path.Join(outDir, "math.go"))
 	if err != nil {
 		panic(err)
 	}
@@ -77,10 +77,14 @@ import (
 	
 	"golang.org/x/exp/constraints"
 )
+
+type Number interface {
+	constraints.Float | constraints.Integer
+}
 	
 `)
 
-	ex, err := parser.ParseFile(token.NewFileSet(), "", b.String(), 0)
+	ex, err := parser.ParseFile(token.NewFileSet(), "", dummyPkg.String(), 0)
 	if err != nil {
 		panic(err)
 	}
@@ -90,7 +94,7 @@ import (
 			name = v.Name.Name
 		)
 
-		if shouldSkip(name) {
+		if slices.Contains(skip, name) {
 			continue
 		}
 
@@ -111,7 +115,7 @@ import (
 			mult := false
 			if pCons.Float || rCons.Float {
 				mult = true
-				fmt.Fprint(f, "N constraints.Float | constraints.Integer")
+				fmt.Fprint(f, "N Number")
 			}
 			if pCons.Int || rCons.Int {
 				if mult {
@@ -282,7 +286,7 @@ func funcDoc(parent context.Context, name string) []string {
 }
 
 func format(parent context.Context) {
-	cmd := exec.CommandContext(parent, "go", "fmt", "math.go")
+	cmd := exec.CommandContext(parent, "go", "fmt", path.Join(outDir, "math.go"))
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		panic(err)

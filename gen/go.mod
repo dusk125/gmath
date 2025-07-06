@@ -1,13 +1,15 @@
 module github.com/dusk125/gmathgen
 
-go 1.20
+go 1.24
+
+replace github.com/dusk125/gmath => ../
 
 require (
-	github.com/spf13/cobra v1.7.0
-	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
+	github.com/spf13/cobra v1.9.1
+	golang.org/x/exp v0.0.0-20250620022241-b7579e27df2b
 )
 
 require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.6 // indirect
 )
